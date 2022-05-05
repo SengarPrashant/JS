@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webworker example</title>
+    <meta charset="UTF-8" />
+    <script>
+        var worker;
+        if(window.Worker){
+            worker = new Worker("worker.js");
+            worker.postMessage('longRunnigTask');
+            worker.addEventListener('message',(e)=>{
+                console.log(e.data);
+                document.body.innerHTML=`<h1>${e.data.message}</h1>`;
+            });
+        }
+    </script>
+  </head>
+  <body>
+    <div class="stars"></div>
+    <script src="worker.js"></script>
+    <h1>Waiting for webworker data...</h1>
+  </body>
+</html>
